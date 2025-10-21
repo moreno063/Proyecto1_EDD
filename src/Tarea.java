@@ -4,20 +4,22 @@ import java.time.LocalDate; //Para manejo de fechas
 /*
  * Esta clase representa una tarea dentro del sistema.
  * Implementa serializable para poder guardarse en un archivo
+ * Implementa comparable para poder ordenar en la cola con prioridad
  */
 
-public class Tarea implements Serializable {
+public class Tarea implements Serializable, Comparable<Tarea> {
+    private static int nextId = 1;
     private int id;
     private String titulo;
     private String descripcion;
     private LocalDate fechaCreacion;
     private LocalDate fechaEntrega;
     private int prioridad; // 1 = Alta, 2 = Media, 3 = Baja.
-    private String estado; // (Pendiente, en progreso o completada) 
-    
-    //Metodo constructor 
+    private String estado; // (Pendiente, en progreso o completada)
 
-    public Tarea(int id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaEntrega, int prioridad, String estado) {
+    // Metodo constructor
+    public Tarea(int id, String titulo, String descripcion, LocalDate fechaCreacion, LocalDate fechaEntrega,
+            int prioridad, String estado) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -26,33 +28,61 @@ public class Tarea implements Serializable {
         this.prioridad = prioridad;
         this.estado = estado;
     }
-    
-    //Metodos getters para acceder a los atributos de la tarea
+
+    // Constructor con id automático
+    public Tarea(String titulo, String descripcion, LocalDate fechaEntrega, int prioridad, String estado) {
+        this.id = nextId++;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaEntrega = fechaEntrega;
+        this.prioridad = prioridad;
+        this.estado = estado;
+    }
+
+    // Método compareTo para comparar tareas a incluir en cola con prioridad primero
+    // por fecha, luego por prioridad
+    @Override
+    public int compareTo(Tarea otra) {
+
+        int cmp = Integer.compare(this.prioridad, otra.prioridad);
+        if (cmp != 0)
+            return cmp;
+        return this.fechaEntrega.compareTo(otra.fechaEntrega);
+
+    }
+
+    // Metodos getters para acceder a los atributos de la tarea
 
     public int getId() {
         return id;
     }
+
     public String getTitulo() {
         return titulo;
     }
+
     public String getDescripcion() {
         return descripcion;
     }
+
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
+
     public LocalDate getFechaEntrega() {
         return fechaEntrega;
     }
+
     public int getPrioridad() {
         return prioridad;
     }
+
     public String getEstado() {
         return estado;
     }
-    
+
     /*
-     * Metodos setters para editar algunos de los atributos (No se incluyen los 
+     * Metodos setters para editar algunos de los atributos (No se incluyen los
      * atributos ID y FechaCreacion ya que estos deben ser inmutables)
      */
 
@@ -76,11 +106,9 @@ public class Tarea implements Serializable {
         this.estado = estado;
     }
 
-   
-    
     @Override
-    public String toString(){
-        return "Tarea [ÏD = " + id + ", Titulo = " + titulo + ", Estado =  " 
-                + estado + ", Prioridad = " + prioridad + ", Fecha Entrega = " + fechaEntrega + "]";
-    }    
+    public String toString() {
+        return "ID = " + id + ", Titulo = " + titulo + ", Estado =  "
+                + estado + ", Prioridad = " + prioridad + ", Fecha Entrega = " + fechaEntrega;
+    }
 }

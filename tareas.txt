@@ -1,0 +1,9 @@
+1;Proyecto Estructuras;Definir tema de proyecto;2025-10-19;2025-12-21;3;Pendiente
+2;Investigación IA;Investigar algoritmos de IA;2025-10-20;2025-11-30;5;En progreso
+3;Base de Datos;Diseñar esquema de base de datos;2025-10-22;2025-11-25;2;Completada
+4;Práctica Java;Implementar proyectos en Java;2025-10-23;2025-12-05;3;Pendiente
+5;Documentación API;Redactar documentación de API;2025-10-24;2025-12-15;1;Completada
+6;Pruebas Unitarias;Realizar pruebas unitarias;2025-10-25;2025-12-10;4;En progreso
+7;Optimización Código;Refactorizar y optimizar código;2025-10-26;2025-12-20;5;En progreso
+8;Presentación Final;Preparar presentación del proyecto;2025-10-27;2025-12-22;2;Pendiente
+9;Parcial calculo;Segundo parcial sobre integrales triples;2025-10-20;2025-11-27;1;Pendiente
